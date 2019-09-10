@@ -27,7 +27,7 @@ Hadoop MapReduce
 
     Spark中的资源并行度影响因素（以Spark on YARN为例）
     1. executor-cores
-    2. num-executors/SPARK_EXECUTOR_INSTANCES
+    2. --num-executors(spark-submit命令选项)/spark.executor.instances(sparkConf配置项)/SPARK_EXECUTOR_INSTANCES(spark-env环境变量)
     3. spark.dynamicAllocation.initialExecutors
     * spark动态资源分配（！！！）
 
@@ -37,6 +37,12 @@ Hadoop MapReduce
     3. 在Spark输入数据读取方法(如textFile)中指定的minPartitions
     4. 在Spark算子中指定的numPartitions
     5. 输入数据文件的物理分块情况
+
+|选项|默认值|描述|
+|---------------------------------------------|-----------|------------------------------------------------------------------------|
+|spark.dynamicAllocation.initialExecutors	|spark.dynamicAllocation.minExecutors	|Initial number of executors to run if dynamic allocation is enabled. <br/>If `--num-executors` (or `spark.executor.instances`) is set and larger than this value, it will be used as the initial number of executors.|
+|spark.default.parallelism	|For distributed shuffle operations like reduceByKey and join, the largest number of partitions in a parent RDD. For operations like parallelize with no parent RDDs, it depends on the cluster manager: <br/>Local mode: number of cores on the local machine <br/>Mesos fine grained mode: 8<br/>Others: total number of cores on all executor nodes or 2, whichever is larger|Default number of partitions in RDDs returned by transformations like join, reduceByKey, and parallelize when not set by user.|
+|
 
 
     【Spark许多自带的封装好的函数（比如textFile()、sequenceFile()）都是使用旧式Hadoop API实现的】

@@ -24,6 +24,7 @@ spark.storage.blockManagerTimeoutIntervalMs   |45000      |内部用来通过超
 |spark.[X].port|（任意值） |用来设置运行Spark应用时用到的各个端口。这些参数对于运行在可靠网络上的集群是很有用的。有效的X包括driver、fileserver、broadcast、replClassServer、blockManager，以及 executor|
 |spark.eventLog.enabled |false |设为true时，开启事件日志机制，这样已完成的Spark作业就可以通过历史服务器（history server）查看。|
 |spark.eventLog.dir |file:///tmp/spark-events|指开启事件日志机制时，事件日志文件的存储位置。这个值指向的路径需要设置到一个全局可见的文件系统中，比如HDFS|
+|
 
 ## 2. Spark执行的组成部分：作业、任务和步骤
 
